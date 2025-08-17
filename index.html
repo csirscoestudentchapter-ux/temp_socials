@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>CSI RSCOE — Socials</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet"/>
+  <style>
+    :root{
+      --text:#e9eef2;
+      --muted:#aab3bd;
+      --glass: rgba(255,255,255,0.08);
+      --border: rgba(255,255,255,0.18);
+      --max:1200px;
+    }
+
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      font-family:'Montserrat',sans-serif;
+      margin:0; color:var(--text);
+      background: radial-gradient(1200px 800px at 50% -10%, #101114 0%, #06070a 50%, #030306 100%);
+      overflow-x:hidden;
+    }
+
+    .noise{
+      position:fixed; inset:0; pointer-events:none; z-index:-3;
+      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='140' height='140'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)' opacity='0.03'/></svg>");
+      background-size:180px;
+    }
+
+    #universe-canvas{position:fixed; inset:0; z-index:-2; pointer-events:none}
+    #starfield{position:fixed; inset:0; z-index:-1; pointer-events:none; overflow:hidden}
+    .star{position:absolute; background:#fff; border-radius:50%; opacity:0; animation:twinkle 3s infinite ease-in-out; filter:drop-shadow(0 0 6px #fff)}
+    @keyframes twinkle{0%,100%{opacity:0; transform:scale(.6)}50%{opacity:1; transform:scale(1.15)}}
+
+    /* Logo top-left */
+    .logo{
+      position:absolute; top:18px; left:18px; z-index:20;
+      display:flex; align-items:center; gap:12px;
+    }
+    .logo img{
+      width:56px; height:70px;
+    }
+    .logo h1{
+      font-size:24px; margin:0; color:#fff;
+      text-shadow:0 0 3px #fff, 0 0 13px #aaa;
+    }
+
+    main{max-width:var(--max); margin:0 auto; padding:120px 18px 80px}
+    .hero{text-align:center; margin-bottom:32px;}
+    .hero h2{font-size: clamp(28px, 6vw, 46px); margin:6px 0 10px;}
+    .hero p{color:var(--muted); margin:0 auto 18px; max-width:750px}
+
+    .grid{display:grid; grid-template-columns: repeat(auto-fit,minmax(260px,1fr)); gap:22px; margin-top:22px}
+    .card{
+      padding:26px; border-radius:20px; background:var(--glass); border:1px solid var(--border);
+      box-shadow:0 8px 30px rgba(0,0,0,.3); transition:.35s ease; text-align:center; backdrop-filter: blur(6px);
+    }
+    .card img{width:96px; height:96px; border-radius:50%; object-fit:cover;}
+    .card:hover{transform: translateY(-10px) scale(1.035)}
+
+    /* Neon glow colors */
+    .card:nth-child(1):hover {
+      box-shadow:0 0 5px #ff4dd2, 0 0 10px #ff4dd2, 0 0 25px #ff4dd2;
+    }
+    .card:nth-child(2):hover {
+      box-shadow:0 0 5px #00e5ff, 0 0 10px #00e5ff, 0 0 25px #00e5ff;
+    }
+    .card:nth-child(3):hover {
+      box-shadow:0 0 5px #00ff85, 0 0 10px #00ff85, 0 0 25px #00ff85;
+    }
+    .card:nth-child(4):hover {
+      box-shadow:0 0 5px #ffffff, 0 0 10px #ffffff, 0 0 25px #ffffff;
+    }
+
+    .meme-grid{display:grid; grid-template-columns: repeat(auto-fit,minmax(240px,1fr)); gap:18px; margin:16px 0 38px}
+    .meme{
+      position:relative; border-radius:22px; overflow:hidden; padding:18px; min-height:160px;
+      border:1px solid var(--border); background: linear-gradient(135deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
+      box-shadow: 0 12px 36px rgba(0,0,0,.35); transition:.35s ease;
+    }
+    .meme:hover{transform: translateY(-8px) rotateX(2deg) rotateY(-2deg)}
+    .meme h4{margin:6px 0 6px}
+    .meme small{color:var(--muted)}
+
+    footer{
+      background:#0b0d11; color:#bfc6ce; padding:40px 18px; text-align:center; border-top:1px solid rgba(255,255,255,.06)
+    }
+    footer h4{color:#e2e8ef; margin:0 0 8px;}
+    footer a{color:#9eb1c3; text-decoration:none}
+  </style>
+</head>
+<body>
+  <div class="noise"></div>
+  <canvas id="universe-canvas" aria-hidden="true"></canvas>
+  <div id="starfield" aria-hidden="true"></div>
+
+  <!-- Logo top-left -->
+  <div class="logo">
+    <img src="d:\Downloads\CSI_RSCOE-removebg-preview.png" alt="CSI Logo" />
+    <h1>CSI RSCOE</h1>
+  </div>
+
+  <main>
+    <section class="hero">
+      <h2>Welcome to <span style="color:#cfd8dc">CSI RSCOE</span> Socials</h2>
+      <p>Stay tapped in with our community — updates, events, and a sprinkle of young energy.</p>
+    </section>
+
+    <section>
+      <div class="grid">
+        <a class="card" href="https://www.instagram.com/csirscoe" target="_blank">
+          <img src="https://media2.dev.to/dynamic/image/width=800%2Cheight=%2Cfit=scale-down%2Cgravity=auto%2Cformat=auto/https%3A%2F%2Fcdn.hashnode.com%2Fres%2Fhashnode%2Fimage%2Fupload%2Fv1654670003399%2FaOsHknZja.png" alt="Instagram"/>
+          <h3>Follow us on Instagram</h3>
+        </a>
+        <a class="card" href="https://www.linkedin.com/company/csi-rscoe-student-chapter" target="_blank">
+          <img src="https://cdn-icons-png.flaticon.com/512/179/179330.png" alt="LinkedIn"/>
+          <h3>Connect with us on LinkedIn</h3>
+        </a>
+        <a class="card" href="https://chat.whatsapp.com/BfO2PsdaWsIGLCLhqApE44?mode=ac_t" target="_blank">
+          <img src="https://storage.googleapis.com/a1aa/image/e0407094-1c58-48bf-cc5b-9bd2690e5b8a.jpg" alt="WhatsApp"/>
+          <h3>Join the WhatsApp Group</h3>
+        </a>
+        <a class="card" href="https://csirscoe.netlify.app/" target="_blank">
+          <img src="d:\Downloads\CSI_RSCOE-removebg-preview.png" alt="CSI Website"/>
+          <h3>Official CSI RSCOE website</h3>
+        </a>
+      </div>
+    </section>
+
+    <section>
+      <h3 class="section-title">Highlights</h3>
+      <div class="meme-grid">
+        <div class="meme grad-1"><h4>“skill issue?” not anymore</h4><small>Hands-on workshops to level up fast.</small></div>
+        <div class="meme grad-2"><h4>hackathons = sleep optional</h4><small>Build. Break. Ship. Repeat.</small></div>
+        <div class="meme grad-3"><h4>touch grass (with us)</h4><small>Meets, talks, and wholesome chaos.</small></div>
+        <div class="meme grad-4"><h4>mentor > tutorial rabbit holes</h4><small>Guidance from seniors & pros.</small></div>
+        <div class="meme grad-5"><h4>ship it. show it. shine.</h4><small>Project demos & portfolio boosts.</small></div>
+        <div class="meme grad-6"><h4>cold emails?</h4><small>Talks, internships, collabs.</small></div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <h4>CSI RSCOE</h4>
+    <p><strong>President:</strong> +91 8530636252</p>
+    <p><strong>Vice President:</strong> +91 8308707941</p>
+    <p class="sub">© 2024 CSI RSCOE. All rights reserved.</p>
+  </footer>
+
+  <script>
+    const starfield = document.getElementById("starfield");
+    const NUM_STARS = 140;
+    function createStars(){
+      starfield.innerHTML = "";
+      for(let i=0;i<NUM_STARS;i++){
+        const s = document.createElement("div");
+        s.className = "star";
+        const size = Math.random()*3+1;
+        s.style.width = size+"px";
+        s.style.height = size+"px";
+        s.style.top = Math.random()*window.innerHeight+"px";
+        s.style.left = Math.random()*window.innerWidth+"px";
+        s.style.animationDuration = (2+Math.random()*3)+"s";
+        s.style.animationDelay = (Math.random()*5)+"s";
+        starfield.appendChild(s);
+      }
+    }
+    createStars(); window.addEventListener("resize", createStars);
+
+    const canvas = document.getElementById("universe-canvas");
+    const ctx = canvas.getContext("2d");
+    function resizeCanvas(){canvas.width=window.innerWidth; canvas.height=window.innerHeight}
+    window.addEventListener("resize", resizeCanvas); resizeCanvas();
+
+    class Nebula{
+      constructor(){this.reset()}
+      reset(){
+        this.x=Math.random()*canvas.width; this.y=Math.random()*canvas.height;
+        this.r=60+Math.random()*120;
+        this.color=`rgba(${80+Math.random()*40},${90+Math.random()*60},${160+Math.random()*40},${0.05+Math.random()*0.09})`;
+        this.vx=(Math.random()-.5)*0.15; this.vy=(Math.random()-.5)*0.15;
+      }
+      update(){
+        this.x+=this.vx; this.y+=this.vy;
+        if(this.x<-this.r) this.x=canvas.width+this.r;
+        if(this.x>canvas.width+this.r) this.x=-this.r;
+        if(this.y<-this.r) this.y=canvas.height+this.r;
+        if(this.y>canvas.height+this.r) this.y=-this.r;
+      }
+      draw(){
+        const g=ctx.createRadialGradient(this.x,this.y,this.r*0.3,this.x,this.y,this.r);
+        g.addColorStop(0,this.color); g.addColorStop(1,"transparent");
+        ctx.fillStyle=g; ctx.beginPath(); ctx.arc(this.x,this.y,this.r,0,Math.PI*2); ctx.fill();
+      }
+    }
+    const nebulas = Array.from({length:8}, ()=>new Nebula());
+    (function animate(){
+      ctx.clearRect(0,0,canvas.width,canvas.height);
+      nebulas.forEach(n=>{n.update(); n.draw();});
+      requestAnimationFrame(animate);
+    })();
+  </script>
+</body>
+</html>
